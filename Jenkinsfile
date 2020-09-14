@@ -29,9 +29,8 @@ pipeline {
                   echo 'Deploying to AWS...'
                   withAWS(credentials: 'aws', region: 'us-east-1') {
                       sh "aws eks --region us-east-1 update-kubeconfig --name jen"
-                      sh "kubectl config use-context arn:aws:eks:us-east-1:076519505878:cluster/jen
-                      sh "kubectl set image deployments/jen jen=cathrine247/jen:latest"
-                      sh "kubectl apply -f deployment/deployment.yml"
+                      sh "kubectl config use-context arn:aws:eks:us-east-1:076519505878:cluster/jen"
+                      sh "kubectl apply -f deployment.yml"
                       sh "kubectl get nodes"
                       sh "kubectl get deployment"
                       sh "kubectl get pod -o wide"
@@ -43,4 +42,9 @@ pipeline {
               steps{
                     echo 'Cleaning up...'
                     sh "docker system prune"
+              }
+        }
+     }
+}
+
           
