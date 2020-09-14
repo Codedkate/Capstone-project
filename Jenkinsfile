@@ -14,13 +14,13 @@ pipeline {
          stage('Build Docker Image') {
               steps {
                   sh 'docker build -t jen .'
-                   sh 'docker image ls'
+                  sh 'docker image ls'
               }
          }
          stage('Push Docker Image') {
               steps {
                   withDockerRegistry([url: "", credentialsId: "jenhub"]) {
-                      sh "docker tag jen catherine247/jen"
+                      sh 'docker tag jen catherine247/jen'
                       sh 'docker push catherine247/jen'
                   }
               }
