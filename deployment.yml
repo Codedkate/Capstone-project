@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jen
+  labels:
+    app: jen
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jen
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: jen
+    spec:
+      containers:
+        - image: catherine247/jen
+          imagePullPolicy: Always
+          name: jen
+          ports:
+            - containerPort: 80
+​
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jen
+  labels:
+    app: jen
+spec:
+  type: LoadBalancer
+  selector:
+    app: jen
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30000
+      protocol: TCP
