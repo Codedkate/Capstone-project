@@ -38,10 +38,10 @@ pipeline {
                   }
               }
         }
-        stage("Cleaning up") {
+        stage("Cleaning dangling files") {
               steps{
                     echo 'Cleaning up...'
-                    sh "docker system prune"
+                    sh "docker system prune -f"
               }
         }
      }
