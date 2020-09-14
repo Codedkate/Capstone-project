@@ -19,8 +19,8 @@ pipeline {
          stage('Push Docker Image') {
               steps {
                   withDockerRegistry([url: "", credentialsId: "jenhub"]) {
-                      sh "docker tag jen cathrine247/jen"
-                      sh 'docker push cathrine247/jen'
+                      sh "docker tag jen catherine247/jen"
+                      sh 'docker push catherine247/jen'
                   }
               }
          }
